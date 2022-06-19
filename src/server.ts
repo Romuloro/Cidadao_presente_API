@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import { routes } from './routes';
 import { AppError } from "./errors/AppError";
 
-const app = express();
+export const app = express();
 
 app.use(express.json());
 
