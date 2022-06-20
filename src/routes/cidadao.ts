@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { CreateCidadaoController } from "../modules/cidadaos/useCase/createCidadaos/CreateCidadaoController"
+import { CreateCidadaoController } from '../modules/cidadaos/useCase/createCidadaos/CreateCidadaoController';
 import { DeleteCidadaoController } from '../modules/cidadaos/useCase/deleteCidadaos/DeleteCidadaosController';
 import { GetAllCidadaoController } from '../modules/cidadaos/useCase/getAllCidadaos/GetAllCidadosController';
 import { GetCidadaoController } from '../modules/cidadaos/useCase/getCidadaos/GetCidadaosController';
@@ -14,10 +14,10 @@ const getCidadaoController = new GetCidadaoController();
 
 const cidadaoRoutes = Router();
 
-cidadaoRoutes.post("/", createCidadaoController.handle)
-cidadaoRoutes.put("/:id", updateCidadaoController.handle);
-cidadaoRoutes.get("/", getAllCidadaoController.handle);
-cidadaoRoutes.get("/:id", getCidadaoController.handle);
-cidadaoRoutes.delete("/:id", deleteCidadaoController.handle);
+cidadaoRoutes.post('/', createCidadaoController.handle);
+cidadaoRoutes.put('/:id', updateCidadaoController.handle);
+cidadaoRoutes.get('/', getAllCidadaoController.handle);
+cidadaoRoutes.get('/:id', getCidadaoController.handle);
+cidadaoRoutes.delete('/:id', deleteCidadaoController.handle);
 
-export { cidadaoRoutes }
+export { cidadaoRoutes };

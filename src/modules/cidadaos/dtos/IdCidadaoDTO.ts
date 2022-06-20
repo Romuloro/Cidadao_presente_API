@@ -1,3 +1,3 @@
 export interface IdCidadaoDTO {
-    id: string;
+  id: string;
 }

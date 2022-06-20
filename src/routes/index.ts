@@ -3,6 +3,6 @@ import { cidadaoRoutes } from './cidadao';
 
 const routes = Router();
 
-routes.use("/cidadao", cidadaoRoutes);
+routes.use('/cidadao', cidadaoRoutes);
 
 export { routes };

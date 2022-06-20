@@ -20,7 +20,7 @@ model Cidadao {
   id String @id @default(uuid())
   name String
   email String @unique
-  celular Int @unique
+  celular String @unique
   senha String 
   nick_name String @unique
   sexo Sexo 

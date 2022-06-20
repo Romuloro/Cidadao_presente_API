@@ -1,18 +1,16 @@
-import { Request, Response } from "express";
-import { GetCidadaoUseCase } from "./GetCidadaosUseCase";
-
-
+import { Request, Response } from 'express';
+import { GetCidadaoUseCase } from './GetCidadaosUseCase';
 
 export class GetCidadaoController {
-    async handle(req: Request, res: Response) {
-        const { id } = req.params;
+  async handle(req: Request, res: Response) {
+    const { id } = req.params;
 
-        const getCidadaoUseCase = new GetCidadaoUseCase()
+    const getCidadaoUseCase = new GetCidadaoUseCase();
 
-        const result = await getCidadaoUseCase.execute({
-            id
-        })
+    const result = await getCidadaoUseCase.execute({
+      id,
+    });
 
-        return res.status(200).json(result)
-    }
+    return res.status(200).json(result);
+  }
 }

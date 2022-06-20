@@ -1,11 +1,11 @@
-import { Sexo } from "@prisma/client";
+import { Sexo } from '@prisma/client';
 
 export interface UpdateCidadaoDTO {
-    id: string;
-    name: string;
-    email: string;
-    celular: number;
-    senha: string;
-    nick_name: string;
-    sexo: Sexo;
+  id: string;
+  name: string;
+  email: string;
+  celular: string;
+  senha: string;
+  nick_name: string;
+  sexo: Sexo;
 }

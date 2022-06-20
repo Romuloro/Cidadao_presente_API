@@ -9,9 +9,11 @@
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\"&& exit 1;",
-    "test:functional": "jest --projects ./test --runInBand",
     "lint": "eslint ./test ./src --ext .ts",
-    "lint:fix": "eslint ./test ./src --ext .ts --fix"
+    "lint:fix": "eslint ./test ./src --ext .ts --fix",
+    "test:functional": "jest --projects ./test --forceExit --runInBand",
+    "style:check": "prettier --check 'src/**/*.ts' 'test/**/*.ts'",
+    "style:fix": "prettier --write 'src/**/*.ts' 'test/**/*.ts'"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
@@ -21,6 +23,7 @@
     "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.18.0",
     "jest": "^28.1.1",
+    "prettier": "^2.7.1",
     "prisma": "^3.15.2",
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.5",
