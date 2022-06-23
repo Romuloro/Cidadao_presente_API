@@ -24,7 +24,7 @@ export class UpdateCidadaoUseCase {
       throw new AppError('Cidadão does not exists', 404);
     }
 
-    //Criar um cidadão
+    //Update um cidadão
     const cidadao = await prisma.cidadao.update({
       where: {
         id,
