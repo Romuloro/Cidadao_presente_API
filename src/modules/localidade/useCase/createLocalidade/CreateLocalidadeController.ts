@@ -10,7 +10,7 @@ export class CreateLocalidadeController {
     const result = await createLocalidadeUseCase.execute({
       latitude,
       longitude,
-      descricao
+      descricao,
     });
 
     return res.status(201).json(result);

@@ -1,4 +1,4 @@
-import { Tipo } from "@prisma/client";
+import { Tipo } from '@prisma/client';
 
 export interface UpdateProblemaDTO {
   id: string;

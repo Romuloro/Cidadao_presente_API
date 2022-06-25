@@ -12,8 +12,8 @@ export class UpdateProblemaController {
       id,
       titulo,
       descricao,
-      tipo
-  });
+      tipo,
+    });
 
     return res.status(200).json(result);
   }

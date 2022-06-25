@@ -7,13 +7,13 @@ export class CreateLocalidadeUseCase {
   async execute({
     latitude,
     longitude,
-    descricao
+    descricao,
   }: CreateLocalidadeDTO): Promise<Localidade> {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
       where: {
         latitude,
-        longitude
+        longitude,
       },
     });
 
@@ -26,7 +26,7 @@ export class CreateLocalidadeUseCase {
       data: {
         latitude,
         longitude,
-        descricao
+        descricao,
       },
     });
 

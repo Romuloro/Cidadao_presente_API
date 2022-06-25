@@ -8,7 +8,7 @@ export class UpdateProblemaUseCase {
     id,
     titulo,
     descricao,
-    tipo
+    tipo,
   }: UpdateProblemaDTO): Promise<Problema> {
     //Cidadão já existe?
     const problemaAlreadyExists = await prisma.problema.findUnique({
@@ -29,7 +29,7 @@ export class UpdateProblemaUseCase {
       data: {
         titulo,
         descricao,
-        tipo
+        tipo,
       },
     });
 

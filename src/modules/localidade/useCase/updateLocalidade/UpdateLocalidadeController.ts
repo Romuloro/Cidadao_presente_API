@@ -12,8 +12,8 @@ export class UpdateLocalidadeController {
       id,
       latitude,
       longitude,
-      descricao
-  });
+      descricao,
+    });
 
     return res.status(200).json(result);
   }

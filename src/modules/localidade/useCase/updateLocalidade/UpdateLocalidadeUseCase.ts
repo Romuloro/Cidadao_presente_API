@@ -8,7 +8,7 @@ export class UpdateLocalidadeUseCase {
     id,
     latitude,
     longitude,
-    descricao
+    descricao,
   }: UpdateLocalidadeDTO): Promise<Localidade> {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
@@ -29,7 +29,7 @@ export class UpdateLocalidadeUseCase {
       data: {
         latitude,
         longitude,
-        descricao
+        descricao,
       },
     });
 
