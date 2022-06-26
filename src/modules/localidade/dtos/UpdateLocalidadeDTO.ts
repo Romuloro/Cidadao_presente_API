@@ -3,4 +3,5 @@ export interface UpdateLocalidadeDTO {
   latitude: string;
   longitude: string;
   descricao: string;
+  nickName: string;
 }

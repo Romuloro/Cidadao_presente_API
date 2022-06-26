@@ -3,7 +3,7 @@ import { UpdateLocalidadeUseCase } from './UpdateLocalidadeUseCase';
 
 export class UpdateLocalidadeController {
   async handle(req: Request, res: Response) {
-    const { id } = req.params;
+    const { id, nickName } = req.params;
     const { latitude, longitude, descricao } = req.body;
 
     const updateLocalidadeUseCase = new UpdateLocalidadeUseCase();
@@ -13,6 +13,7 @@ export class UpdateLocalidadeController {
       latitude,
       longitude,
       descricao,
+      nickName
     });
 
     return res.status(200).json(result);

@@ -11,6 +11,7 @@ export class UpdatePostUseCase {
     status,
     localidade_id,
     cidadao_id,
+    problemas_
   }: UpdatePostDTO): Promise<Post> {
     //Localidade já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
@@ -56,6 +57,11 @@ export class UpdatePostUseCase {
         status,
         localidade_id,
         cidadao_id,
+        problemas: {
+          connect: [
+            { id: problemas_ }
+          ]
+        }
       },
     });
 

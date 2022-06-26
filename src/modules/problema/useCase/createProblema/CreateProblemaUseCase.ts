@@ -7,7 +7,7 @@ export class CreateProblemaUseCase {
   async execute({
     titulo,
     descricao,
-    tipo,
+    tipo
   }: CreateProblemaDTO): Promise<Problema> {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.problema.findUnique({

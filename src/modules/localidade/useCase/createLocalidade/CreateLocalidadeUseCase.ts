@@ -8,6 +8,7 @@ export class CreateLocalidadeUseCase {
     latitude,
     longitude,
     descricao,
+    nickName
   }: CreateLocalidadeDTO): Promise<Localidade> {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.localidade.findFirst({
@@ -27,6 +28,11 @@ export class CreateLocalidadeUseCase {
         latitude,
         longitude,
         descricao,
+        cidadaos: {
+          connect: [
+            { nick_name: nickName } 
+          ],
+        },
       },
     });
 

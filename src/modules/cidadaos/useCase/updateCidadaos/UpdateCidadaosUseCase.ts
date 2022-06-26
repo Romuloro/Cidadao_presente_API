@@ -37,6 +37,11 @@ export class UpdateCidadaoUseCase {
         nick_name,
         sexo,
       },
+      include: {
+        posts: true,
+        localidades: true,
+        comentarios: true
+      }
     });
 
     return cidadao;

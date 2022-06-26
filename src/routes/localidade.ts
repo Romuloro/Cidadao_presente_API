@@ -14,8 +14,8 @@ const getLocalidadeController = new GetLocalidadeController();
 
 const localidadeRoutes = Router();
 
-localidadeRoutes.post('/', createLocalidadeController.handle);
-localidadeRoutes.put('/:id', updateLocalidadeController.handle);
+localidadeRoutes.post('/:nickName', createLocalidadeController.handle);
+localidadeRoutes.put('/:id/:nickName', updateLocalidadeController.handle);
 localidadeRoutes.get('/', getAllLocalidadeController.handle);
 localidadeRoutes.get('/:id', getLocalidadeController.handle);
 localidadeRoutes.delete('/:id', deleteLocalidadeController.handle);

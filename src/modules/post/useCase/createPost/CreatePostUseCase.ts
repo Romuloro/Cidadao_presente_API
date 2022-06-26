@@ -10,6 +10,7 @@ export class CreatePostUseCase {
     status,
     localidade_id,
     cidadao_id,
+    problemas_
   }: CreatePostDTO): Promise<Post> {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
@@ -41,6 +42,11 @@ export class CreatePostUseCase {
         status,
         localidade_id,
         cidadao_id,
+        problemas: {
+          connect: [
+            { id: problemas_ }
+          ]
+        }
       },
     });
 

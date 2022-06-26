@@ -33,6 +33,11 @@ export class CreateCidadaoUseCase {
         nick_name,
         sexo,
       },
+      include: {
+        posts:true,
+        localidades:true,
+        comentarios:true
+      }
     });
 
     return cidadao;

@@ -6,4 +6,5 @@ export interface CreatePostDTO {
   status: Status;
   localidade_id: string;
   cidadao_id: string;
+  problemas_: string;
 }
