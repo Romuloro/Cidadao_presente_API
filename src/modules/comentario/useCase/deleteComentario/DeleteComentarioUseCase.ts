@@ -13,7 +13,7 @@ export class DeleteComentarioUseCase {
     });
 
     if (!comentarioAlreadyExists) {
-      throw new AppError('Comentario does not exists', 404);
+      throw new AppError('Comentário does not exists', 404);
     }
 
     //Criar um comentario
