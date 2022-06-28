@@ -23,6 +23,8 @@ app.use((err: Error, req: Request, resp: Response, next: NextFunction) => {
   });
 });
 
-app.listen(3003, () =>
-  console.log('Server is running in http://localhost:3003')
-);
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(3003, () =>
+    console.log('Server is running in http://localhost:3003')
+  );
+}
