@@ -2,10 +2,10 @@ import supertest from 'supertest';
 import { app } from '../../src/server';
 
 const comentario_create_Mock = {
-  descricao: "Concordo muito! Lá está com um cheiro muito ruim e inseguro.",
-  tipo: "Positivo",
-  cidadao_id: "69572845-2679-4e80-8971-4b647f47adb6",
-  post_id: "a02c59ed-79cf-4332-98bb-de04b3f4ed07"
+  descricao: 'Concordo muito! Lá está com um cheiro muito ruim e inseguro.',
+  tipo: 'Positivo',
+  cidadao_id: '69572845-2679-4e80-8971-4b647f47adb6',
+  post_id: 'a02c59ed-79cf-4332-98bb-de04b3f4ed07',
 };
 
 const cidadao_create_error_Mock = {
@@ -44,7 +44,9 @@ describe('Delete comentário route test', () => {
     const { body, status } = await supertest(app)
       .post(`/comentario/`)
       .send(comentario_create_Mock);
-    const responseDelete = await supertest(app).delete(`/comentario/${body.id}`);
+    const responseDelete = await supertest(app).delete(
+      `/comentario/${body.id}`
+    );
     expect(responseDelete.status).toEqual(200);
     expect(responseDelete.body).toEqual('');
   });
@@ -66,21 +68,24 @@ describe('Update comentário route test', () => {
     const { body, status } = await supertest(app)
       .post(`/comentario/`)
       .send(comentario_create_Mock);
-    const responseUpdate = await (await supertest(app).put(`/comentario/${body.id}`).send({
-      descricao: "Concordo muito! Lá está com um cheiro muito ruim e inseguro.",
-      tipo: "Negativo",
-      cidadao_id: "69572845-2679-4e80-8971-4b647f47adb6",
-      post_id: "a02c59ed-79cf-4332-98bb-de04b3f4ed07",
-    }));
+    const responseUpdate = await await supertest(app)
+      .put(`/comentario/${body.id}`)
+      .send({
+        descricao:
+          'Concordo muito! Lá está com um cheiro muito ruim e inseguro.',
+        tipo: 'Negativo',
+        cidadao_id: '69572845-2679-4e80-8971-4b647f47adb6',
+        post_id: 'a02c59ed-79cf-4332-98bb-de04b3f4ed07',
+      });
     expect(responseUpdate.status).toEqual(200);
     expect(responseUpdate.body).toEqual({
       id: body.id,
-      descricao: "Concordo muito! Lá está com um cheiro muito ruim e inseguro.",
-      tipo: "Negativo",
-      cidadao_id: "69572845-2679-4e80-8971-4b647f47adb6",
-      post_id: "a02c59ed-79cf-4332-98bb-de04b3f4ed07",
-      create_at: body.create_at,
-      updated_at: body.updated_at,
+      descricao: 'Concordo muito! Lá está com um cheiro muito ruim e inseguro.',
+      tipo: 'Negativo',
+      cidadao_id: '69572845-2679-4e80-8971-4b647f47adb6',
+      post_id: 'a02c59ed-79cf-4332-98bb-de04b3f4ed07',
+      create_at: responseUpdate.body.create_at,
+      updated_at: responseUpdate.body.updated_at,
     });
 
     await supertest(app).delete(`/comentario/${body.id}`);
@@ -98,9 +103,7 @@ describe('Update comentário route test', () => {
   });
 
   it('should return error when the post connect an comment of the citizen does not exist', async () => {
-    const { body, status } = await supertest(app).get(
-      `/post/${idErrorMock}`
-    );
+    const { body, status } = await supertest(app).get(`/post/${idErrorMock}`);
     expect(status).toEqual(404);
     expect(body).toEqual({
       message: 'Post does not exists',
@@ -148,23 +151,19 @@ describe('Create comentário route test', () => {
     expect(status).toEqual(201);
     expect(body).toEqual({
       id: body.id,
-      descricao: "Concordo muito! Lá está com um cheiro muito ruim e inseguro.",
-      tipo: "Positivo",
-      cidadao_id: "69572845-2679-4e80-8971-4b647f47adb6",
-      post_id: "a02c59ed-79cf-4332-98bb-de04b3f4ed07",
+      descricao: 'Concordo muito! Lá está com um cheiro muito ruim e inseguro.',
+      tipo: 'Positivo',
+      cidadao_id: '69572845-2679-4e80-8971-4b647f47adb6',
+      post_id: 'a02c59ed-79cf-4332-98bb-de04b3f4ed07',
       create_at: body.create_at,
       updated_at: body.updated_at,
     });
 
-    await supertest(app).delete(
-      `/comentario/${body.id}`
-    );
+    await supertest(app).delete(`/comentario/${body.id}`);
   });
 
   it('should return error when the post connect an comment of the citizen does not exist', async () => {
-    const { body, status } = await supertest(app).get(
-      `/post/${idErrorMock}`
-    );
+    const { body, status } = await supertest(app).get(`/post/${idErrorMock}`);
     expect(status).toEqual(404);
     expect(body).toEqual({
       message: 'Post does not exists',

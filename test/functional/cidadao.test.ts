@@ -78,8 +78,8 @@ describe('Update cidadao route test', () => {
       senha: '12345678',
       nick_name: 'Teste_nick3',
       sexo: 'Masculino',
-      create_at: body.create_at,
-      updated_at: body.updated_at,
+      create_at: responseUpdate.body.create_at,
+      updated_at: responseUpdate.body.updated_at,
     });
 
     const deleteCidadaoMock = await supertest(app).delete(

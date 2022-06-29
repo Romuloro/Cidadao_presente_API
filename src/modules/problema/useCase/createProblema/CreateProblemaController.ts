@@ -10,7 +10,7 @@ export class CreateProblemaController {
     const result = await createProblemaUseCase.execute({
       titulo,
       descricao,
-      tipo
+      tipo,
     });
 
     return res.status(201).json(result);

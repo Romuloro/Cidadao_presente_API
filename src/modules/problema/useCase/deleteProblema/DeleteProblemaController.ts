@@ -7,7 +7,7 @@ export class DeleteProblemaController {
 
     const deleteProblemaUseCase = new DeleteProblemaUseCase();
 
-    const result = await deleteProblemaUseCase.execute({
+    await deleteProblemaUseCase.execute({
       id,
     });
 

@@ -36,7 +36,7 @@ export class UpdateCidadaoUseCase {
         senha,
         nick_name,
         sexo,
-      }
+      },
     });
 
     return cidadao;

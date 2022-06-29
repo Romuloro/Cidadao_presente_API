@@ -11,7 +11,7 @@ export class UpdatePostUseCase {
     status,
     localidade_id,
     cidadao_id,
-    problemas_
+    problemas_,
   }: UpdatePostDTO): Promise<Post> {
     //Localidade já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
@@ -33,6 +33,17 @@ export class UpdatePostUseCase {
 
     if (!cidadaoAlreadyExists) {
       throw new AppError('Cidadão does not exists', 404);
+    }
+
+    //Cidadão já existe?
+    const problemaAlreadyExists = await prisma.problema.findUnique({
+      where: {
+        id: problemas_,
+      },
+    });
+
+    if (!problemaAlreadyExists) {
+      throw new AppError('Problema does not exists', 404);
     }
 
     //Cidadão já existe?
@@ -58,10 +69,8 @@ export class UpdatePostUseCase {
         localidade_id,
         cidadao_id,
         problemas: {
-          connect: [
-            { id: problemas_ }
-          ]
-        }
+          connect: [{ id: problemas_ }],
+        },
       },
     });
 

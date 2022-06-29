@@ -13,7 +13,7 @@ export class UpdateLocalidadeController {
       latitude,
       longitude,
       descricao,
-      nickName
+      nickName,
     });
 
     return res.status(200).json(result);

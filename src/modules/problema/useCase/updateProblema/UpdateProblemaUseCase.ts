@@ -18,7 +18,7 @@ export class UpdateProblemaUseCase {
     });
 
     if (!problemaAlreadyExists) {
-      throw new AppError('Cidadão does not exists', 404);
+      throw new AppError('Problema does not exists', 404);
     }
 
     //Update um cidadão

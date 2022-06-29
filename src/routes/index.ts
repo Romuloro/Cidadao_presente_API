@@ -18,5 +18,4 @@ routes.use('/comentario', comentarioRoutes);
 
 routes.use('/post', postRoutes);
 
-
 export { routes };

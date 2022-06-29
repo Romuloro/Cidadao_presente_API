@@ -32,7 +32,7 @@ export class CreateCidadaoUseCase {
         senha,
         nick_name,
         sexo,
-      }
+      },
     });
 
     return cidadao;

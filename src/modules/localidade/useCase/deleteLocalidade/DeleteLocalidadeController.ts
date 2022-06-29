@@ -7,7 +7,7 @@ export class DeleteLocalidadeController {
 
     const deleteLocalidadeUseCase = new DeleteLocalidadeUseCase();
 
-    const result = await deleteLocalidadeUseCase.execute({
+    await deleteLocalidadeUseCase.execute({
       id,
     });
 

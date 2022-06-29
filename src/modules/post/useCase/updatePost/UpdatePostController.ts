@@ -4,7 +4,14 @@ import { UpdatePostUseCase } from './UpdatePostUseCase';
 export class UpdatePostController {
   async handle(req: Request, res: Response) {
     const { id } = req.params;
-    const { anonimo, descricao, status, localidade_id, cidadao_id, problemas_ } = req.body;
+    const {
+      anonimo,
+      descricao,
+      status,
+      localidade_id,
+      cidadao_id,
+      problemas_,
+    } = req.body;
 
     const updatePostUseCase = new UpdatePostUseCase();
 
@@ -15,7 +22,7 @@ export class UpdatePostController {
       status,
       localidade_id,
       cidadao_id,
-      problemas_
+      problemas_,
     });
 
     return res.status(200).json(result);

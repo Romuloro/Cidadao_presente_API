@@ -9,7 +9,7 @@ export class UpdateLocalidadeUseCase {
     latitude,
     longitude,
     descricao,
-    nickName
+    nickName,
   }: UpdateLocalidadeDTO): Promise<Localidade> {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
@@ -19,6 +19,17 @@ export class UpdateLocalidadeUseCase {
     });
 
     if (!localidadeAlreadyExists) {
+      throw new AppError('Localidade does not exists', 404);
+    }
+
+    //Cidadão já existe?
+    const cidadaoAlreadyExists = await prisma.cidadao.findUnique({
+      where: {
+        nick_name: nickName,
+      },
+    });
+
+    if (!cidadaoAlreadyExists) {
       throw new AppError('Cidadão does not exists', 404);
     }
 
@@ -32,11 +43,9 @@ export class UpdateLocalidadeUseCase {
         longitude,
         descricao,
         cidadaos: {
-          connect: [
-            { nick_name: nickName }
-          ],
+          connect: [{ nick_name: nickName }],
         },
-      }
+      },
     });
 
     return localidade;
