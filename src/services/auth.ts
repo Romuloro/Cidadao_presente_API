@@ -20,7 +20,7 @@ export default class AuthService {
         return await bcrypt.compare(password, hashedPassword);
     }
 
-    public static generateToken({ id }: IdCidadaoDTO) {
+    public static generateToken(id: string): string {
         return jwt.sign({ id }, endpointsConfig.AuthKey, {
             expiresIn: endpointsConfig.ExpiresIn,
         });
