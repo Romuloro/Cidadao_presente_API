@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { AppError } from "../../../../errors/AppError";
 import { prisma } from "../../../../prisma/client";
 import AuthService from "../../../../services/auth";

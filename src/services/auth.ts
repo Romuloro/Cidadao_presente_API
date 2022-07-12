@@ -1,9 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import endpointsConfig from "../config/endpoints.config";
-import { IdCidadaoDTO } from "../modules/cidadaos/dtos/IdCidadaoDTO";
-
-
 
 export default class AuthService {
     public static async hashPassword(
