@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import AuthService from '../../../../services/auth';
 import { UpdateCidadaoUseCase } from './UpdateCidadaosUseCase';
 
 export class UpdateCidadaoController {
@@ -8,12 +9,14 @@ export class UpdateCidadaoController {
 
     const createCidadaoUseCase = new UpdateCidadaoUseCase();
 
+    const encryptedPassword = await AuthService.hashPassword(senha)
+
     const result = await createCidadaoUseCase.execute({
       id,
       name,
       email,
       celular,
-      senha,
+      senha: encryptedPassword,
       nick_name,
       sexo,
     });
