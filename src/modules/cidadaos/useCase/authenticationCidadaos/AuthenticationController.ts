@@ -14,6 +14,6 @@ export class AuthenticationController {
             }
         )
 
-        return res.cookie("token", result).status(200).json(result)
+        return res.cookie("token", result, { maxAge: 24 * 60 * 60 * 1000 }).status(200).json()
     }
 }

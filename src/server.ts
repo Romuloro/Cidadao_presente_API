@@ -4,6 +4,7 @@ import { routes } from './routes';
 import { AppError } from './errors/AppError';
 import dotenv from 'dotenv';
 import endpoint from "./config/endpoints.config"
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ export const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use(routes);
 

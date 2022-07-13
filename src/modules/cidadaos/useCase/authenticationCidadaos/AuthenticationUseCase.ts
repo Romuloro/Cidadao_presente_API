@@ -5,8 +5,10 @@ import { AuthCidadaoDTO } from "../../dtos/AuthCidadaoDTO";
 
 export class AuthCidadaoUseCase {
     async execute(
-        {email,
-            senha }: AuthCidadaoDTO
+        {
+            email,
+            senha
+        }: AuthCidadaoDTO
     ): Promise<string> {
         const cidadao = await prisma.cidadao.findUnique({
             where: { email }
