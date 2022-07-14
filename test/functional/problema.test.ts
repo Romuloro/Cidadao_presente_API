@@ -45,8 +45,7 @@ describe('Delete Problema route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Problema does not exists',
-      status: 'error',
+      message: 'Problema does not exists'
     });
   });
 });
@@ -82,8 +81,7 @@ describe('Update Problema route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Problema does not exists',
-      status: 'error',
+      message: 'Problema does not exists'
     });
   });
 });
@@ -102,8 +100,7 @@ describe('Get Problema route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Problema does not exists',
-      status: 'error',
+      message: 'Problema does not exists'
     });
   });
 });
@@ -130,8 +127,7 @@ describe('Create Problema route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Problema does not exists',
-      status: 'error',
+      message: 'Problema does not exists'
     });
   });
 });

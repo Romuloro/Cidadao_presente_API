@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import { Response } from "express";
 import jwt from "jsonwebtoken";
 import endpointsConfig from "../config/endpoints.config";
-import { AppError } from "../errors/AppError";
 
 export default class AuthService {
     public static async hashPassword(

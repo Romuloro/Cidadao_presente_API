@@ -9,7 +9,7 @@ export class DeleteComentarioController {
 
     await deleteComentarioUseCase.execute({
       id,
-    });
+    }, res);
 
     return res.status(200).json();
   }

@@ -17,7 +17,7 @@ export class CreateCidadaoController {
       senha: encryptedPassword,
       nick_name,
       sexo,
-    });
+    }, res);
 
     return res.status(201).json(result);
   }

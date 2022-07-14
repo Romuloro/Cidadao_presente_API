@@ -1,10 +1,9 @@
-import { Problema } from '@prisma/client';
-import { AppError } from '../../../../errors/AppError';
+import { Response } from 'express';
 import { prisma } from '../../../../prisma/client';
 import { IdProblemaDTO } from '../../dtos/IdProblemaDTO';
 
 export class DeleteProblemaUseCase {
-  async execute({ id }: IdProblemaDTO): Promise<Problema> {
+  async execute({ id }: IdProblemaDTO, res: Response) {
     //Problema já existe?
     const problemaAlreadyExists = await prisma.problema.findUnique({
       where: {
@@ -13,7 +12,7 @@ export class DeleteProblemaUseCase {
     });
 
     if (!problemaAlreadyExists) {
-      throw new AppError('Problema does not exists', 404);
+      return res.status(404).json({ message: "Problema does not exists" })
     }
 
     //Criar um problema

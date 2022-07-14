@@ -14,7 +14,7 @@ export class UpdateComentarioController {
       tipo,
       cidadao_id,
       post_id,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

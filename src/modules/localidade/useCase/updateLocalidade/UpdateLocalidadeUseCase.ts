@@ -1,5 +1,4 @@
-import { Localidade } from '@prisma/client';
-import { AppError } from '../../../../errors/AppError';
+import { Response } from 'express';
 import { prisma } from '../../../../prisma/client';
 import { UpdateLocalidadeDTO } from '../../dtos/UpdateLocalidadeDTO';
 
@@ -10,7 +9,7 @@ export class UpdateLocalidadeUseCase {
     longitude,
     descricao,
     nickName,
-  }: UpdateLocalidadeDTO): Promise<Localidade> {
+  }: UpdateLocalidadeDTO, res: Response) {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
       where: {
@@ -19,7 +18,7 @@ export class UpdateLocalidadeUseCase {
     });
 
     if (!localidadeAlreadyExists) {
-      throw new AppError('Localidade does not exists', 404);
+      return res.status(404).json({ message: "Localidade does not exists" })
     }
 
     //Cidadão já existe?
@@ -30,7 +29,7 @@ export class UpdateLocalidadeUseCase {
     });
 
     if (!cidadaoAlreadyExists) {
-      throw new AppError('Cidadão does not exists', 404);
+      return res.status(404).json({ message: "Cidadão does not exists" })
     }
 
     //Update um cidadão

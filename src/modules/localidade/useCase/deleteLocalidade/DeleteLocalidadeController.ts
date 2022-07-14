@@ -9,7 +9,7 @@ export class DeleteLocalidadeController {
 
     await deleteLocalidadeUseCase.execute({
       id,
-    });
+    }, res);
 
     return res.status(200).json();
   }

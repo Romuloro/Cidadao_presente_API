@@ -9,7 +9,7 @@ export class DeleteProblemaController {
 
     await deleteProblemaUseCase.execute({
       id,
-    });
+    }, res);
 
     return res.status(200).json();
   }

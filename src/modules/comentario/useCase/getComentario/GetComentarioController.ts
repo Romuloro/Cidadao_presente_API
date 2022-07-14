@@ -9,7 +9,7 @@ export class GetComentarioController {
 
     const result = await getComentarioUseCase.execute({
       id,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

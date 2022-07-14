@@ -10,6 +10,15 @@ const cidadao_create_Mock = {
   sexo: 'Masculino',
 };
 
+const cidadao_update_Mock = {
+  name: 'Teste Creat',
+  email: 'test_03@teste.com',
+  celular: '219999999975',
+  senha: '12345678',
+  nick_name: 'Teste_nick3',
+  sexo: 'Masculino',
+};
+
 const cidadao_create_error_Mock = {
   name: 'Rômulo Rodrigues de Oliveira',
   email: 'romulo_rodrigues@teste.com',
@@ -25,7 +34,7 @@ const sutFactoryGetAll = async () => {
 };
 
 const idMock = '73dda17d-dd32-470a-8dde-b9518b4dcf1a';
-const idErrorMock = '73dda17d-dd32-470a-8dde-b9518b4dcf1';
+const idErrorMock = '73dda17d-dd32-470a-8dde-b9518b4dcf1saidjaisjdipajd';
 
 const sutFactoryGet = async () => {
   const { body, status } = await supertest(app).get(`/cidadao/${idMock}`);
@@ -43,9 +52,7 @@ describe('Get all cidadao route test', () => {
 
 describe('Delete cidadao route test', () => {
   it('should delete an citizen in database', async () => {
-    const { body, status } = await supertest(app)
-      .post(`/cidadao/`)
-      .send(cidadao_create_Mock);
+    const { body, status } = await supertest(app).post(`/cidadao/`).send(cidadao_create_Mock);
     const responseDelete = await supertest(app).delete(`/cidadao/${body.id}`);
     expect(responseDelete.status).toEqual(200);
     expect(responseDelete.body).toEqual('');
@@ -57,8 +64,7 @@ describe('Delete cidadao route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 });
@@ -68,33 +74,30 @@ describe('Update cidadao route test', () => {
     const { body, status } = await supertest(app)
       .post(`/cidadao/`)
       .send(cidadao_create_Mock);
-    const responseUpdate = await supertest(app).put(`/cidadao/${body.id}`);
+    const responseUpdate = await supertest(app).put(`/cidadao/${body.id}`).send(cidadao_update_Mock);
     expect(responseUpdate.status).toEqual(200);
     expect(responseUpdate.body).toEqual({
       id: body.id,
-      name: 'Teste Create',
+      name: 'Teste Creat',
       email: 'test_03@teste.com',
       celular: '219999999975',
-      senha: '12345678',
+      senha: responseUpdate.body.senha,
       nick_name: 'Teste_nick3',
       sexo: 'Masculino',
       create_at: responseUpdate.body.create_at,
       updated_at: responseUpdate.body.updated_at,
     });
 
-    const deleteCidadaoMock = await supertest(app).delete(
-      `/cidadao/${body.id}`
-    );
+    await supertest(app).delete(`/cidadao/${body.id}`);
   });
 
   it('should return error when an citizen does not exist', async () => {
     const { body, status } = await supertest(app).put(
       `/cidadao/${idErrorMock}`
-    );
+    ).send(cidadao_update_Mock);
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 });
@@ -113,8 +116,7 @@ describe('Get cidadao route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 });
@@ -130,26 +132,23 @@ describe('Create cidadao route test', () => {
       name: 'Teste Create',
       email: 'test_03@teste.com',
       celular: '219999999975',
-      senha: '12345678',
+      senha: body.senha,
       nick_name: 'Teste_nick3',
       sexo: 'Masculino',
       create_at: body.create_at,
       updated_at: body.updated_at,
     });
 
-    const deleteCidadaoMock = await supertest(app).delete(
-      `/cidadao/${body.id}`
-    );
+    await supertest(app).delete(`/cidadao/${body.id}`);
   });
 
   it('should return error when an citizen already exist', async () => {
     const { body, status } = await supertest(app)
       .post(`/cidadao/`)
       .send(cidadao_create_error_Mock);
-    expect(status).toEqual(400);
+    expect(status).toEqual(401);
     expect(body).toEqual({
-      message: 'Cidadão already exists',
-      status: 'error',
+      message: 'Cidadão already exists'
     });
   });
 });

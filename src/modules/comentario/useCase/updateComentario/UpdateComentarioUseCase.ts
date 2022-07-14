@@ -1,5 +1,4 @@
-import { Comentario } from '@prisma/client';
-import { AppError } from '../../../../errors/AppError';
+import { Response } from 'express';
 import { prisma } from '../../../../prisma/client';
 import { UpdateComentarioDTO } from '../../dtos/UpdateComentarioDTO';
 
@@ -10,7 +9,7 @@ export class UpdateComentarioUseCase {
     tipo,
     cidadao_id,
     post_id,
-  }: UpdateComentarioDTO): Promise<Comentario> {
+  }: UpdateComentarioDTO, res: Response) {
     //Cidadão existe?
     const cidadaoAlreadyExists = await prisma.cidadao.findUnique({
       where: {
@@ -19,7 +18,7 @@ export class UpdateComentarioUseCase {
     });
 
     if (!cidadaoAlreadyExists) {
-      throw new AppError('Cidadão does not exists', 404);
+      return res.status(404).json({ message: "Cidadão does not exists" })
     }
 
     //Post existe?
@@ -30,7 +29,7 @@ export class UpdateComentarioUseCase {
     });
 
     if (!postAlreadyExists) {
-      throw new AppError('Post does not exists', 404);
+      return res.status(404).json({ message: "Post does not exists" })
     }
 
     //Comentário existe?
@@ -41,7 +40,7 @@ export class UpdateComentarioUseCase {
     });
 
     if (!comentarioAlreadyExists) {
-      throw new AppError('Comentário does not exists', 404);
+      return res.status(404).json({ message: "Comentário does not exists" })
     }
 
     //Update um cidadão

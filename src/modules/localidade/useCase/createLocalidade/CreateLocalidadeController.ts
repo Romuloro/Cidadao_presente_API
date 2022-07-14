@@ -13,7 +13,7 @@ export class CreateLocalidadeController {
       longitude,
       descricao,
       nickName,
-    });
+    }, res);
 
     return res.status(201).json(result);
   }

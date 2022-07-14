@@ -9,7 +9,7 @@ export class GetProblemaController {
 
     const result = await getProblemaUseCase.execute({
       id,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

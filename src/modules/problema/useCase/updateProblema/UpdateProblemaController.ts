@@ -13,7 +13,7 @@ export class UpdateProblemaController {
       titulo,
       descricao,
       tipo,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

@@ -14,7 +14,7 @@ export class UpdateLocalidadeController {
       longitude,
       descricao,
       nickName,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

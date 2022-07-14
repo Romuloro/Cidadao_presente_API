@@ -55,8 +55,7 @@ describe('Delete Localidade route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Localidade does not exists',
-      status: 'error',
+      message: 'Localidade does not exists'
     });
   });
 });
@@ -94,8 +93,7 @@ describe('Update Localidade route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Localidade does not exists',
-      status: 'error',
+      message: 'Localidade does not exists'
     });
   });
 
@@ -105,8 +103,7 @@ describe('Update Localidade route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 });
@@ -125,8 +122,7 @@ describe('Get Localidade route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Localidade does not exists',
-      status: 'error',
+      message: 'Localidade does not exists'
     });
   });
 });
@@ -156,8 +152,7 @@ describe('Create Localidade route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 
@@ -167,8 +162,7 @@ describe('Create Localidade route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Localidade does not exists',
-      status: 'error',
+      message: 'Localidade does not exists'
     });
   });
 });

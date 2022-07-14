@@ -19,7 +19,7 @@ export class UpdateCidadaoController {
       senha: encryptedPassword,
       nick_name,
       sexo,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

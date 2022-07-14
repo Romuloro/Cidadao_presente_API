@@ -21,10 +21,10 @@ const authToken = new AuthToken()
 const cidadaoRoutes = Router();
 
 cidadaoRoutes.post('/login', authenticationController.handle)
-cidadaoRoutes.post('/', authToken.execute, createCidadaoController.handle);
-cidadaoRoutes.put('/:id', authToken.execute, updateCidadaoController.handle);
-cidadaoRoutes.get('/', authToken.execute, getAllCidadaoController.handle);
-cidadaoRoutes.get('/:id', authToken.execute, getCidadaoController.handle);
-cidadaoRoutes.delete('/:id', authToken.execute, deleteCidadaoController.handle);
+cidadaoRoutes.post('/'/* , authToken.execute */, createCidadaoController.handle);
+cidadaoRoutes.put('/:id'/* , authToken.execute */, updateCidadaoController.handle);
+cidadaoRoutes.get('/'/* , authToken.execute */, getAllCidadaoController.handle);
+cidadaoRoutes.get('/:id'/* , authToken.execute */, getCidadaoController.handle);
+cidadaoRoutes.delete('/:id'/* , authToken.execute */, deleteCidadaoController.handle);
 
 export { cidadaoRoutes };

@@ -7,9 +7,7 @@ export class GetCidadaoController {
 
     const getCidadaoUseCase = new GetCidadaoUseCase();
 
-    const result = await getCidadaoUseCase.execute({
-      id,
-    });
+    const result = await getCidadaoUseCase.execute({id}, res);
 
     return res.status(200).json(result);
   }

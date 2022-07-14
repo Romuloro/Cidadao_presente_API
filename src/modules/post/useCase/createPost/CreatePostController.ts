@@ -21,7 +21,7 @@ export class CreatePostController {
       localidade_id,
       cidadao_id,
       problemas_,
-    });
+    }, res);
 
     return res.status(201).json(result);
   }

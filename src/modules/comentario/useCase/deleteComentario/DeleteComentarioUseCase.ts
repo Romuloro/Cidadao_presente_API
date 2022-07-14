@@ -1,10 +1,9 @@
-import { Comentario } from '@prisma/client';
-import { AppError } from '../../../../errors/AppError';
+import { Response } from 'express';
 import { prisma } from '../../../../prisma/client';
 import { IdComentarioDTO } from '../../dtos/IdComentarioDTO';
 
 export class DeleteComentarioUseCase {
-  async execute({ id }: IdComentarioDTO): Promise<Comentario> {
+  async execute({ id }: IdComentarioDTO ,res: Response) {
     //Comentario já existe?
     const comentarioAlreadyExists = await prisma.comentario.findUnique({
       where: {
@@ -13,7 +12,7 @@ export class DeleteComentarioUseCase {
     });
 
     if (!comentarioAlreadyExists) {
-      throw new AppError('Comentário does not exists', 404);
+      return res.status(404).json({ message: "Comentário does not exists" })
     }
 
     //Criar um comentario

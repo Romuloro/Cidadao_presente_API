@@ -12,7 +12,7 @@ export class CreateComentarioController {
       tipo,
       cidadao_id,
       post_id,
-    });
+    }, res);
 
     return res.status(201).json(result);
   }

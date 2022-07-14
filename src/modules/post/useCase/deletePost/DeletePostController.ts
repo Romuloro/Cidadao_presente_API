@@ -9,7 +9,7 @@ export class DeletePostController {
 
     await deletePostUseCase.execute({
       id,
-    });
+    }, res);
 
     return res.status(200).json();
   }

@@ -9,7 +9,7 @@ export class GetLocalidadeController {
 
     const result = await getLocalidadeUseCase.execute({
       id,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

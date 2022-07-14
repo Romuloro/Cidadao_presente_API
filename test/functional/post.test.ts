@@ -49,8 +49,7 @@ describe('Delete post route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Post does not exists',
-      status: 'error',
+      message: 'Post does not exists'
     });
   });
 });
@@ -93,8 +92,7 @@ describe('Update Post route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Localidade does not exists',
-      status: 'error',
+      message: 'Localidade does not exists'
     });
   });
 
@@ -104,8 +102,7 @@ describe('Update Post route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Problema does not exists',
-      status: 'error',
+      message: 'Problema does not exists'
     });
   });
 
@@ -115,8 +112,7 @@ describe('Update Post route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 
@@ -124,8 +120,7 @@ describe('Update Post route test', () => {
     const { body, status } = await supertest(app).get(`/post/${idErrorMock}`);
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Post does not exists',
-      status: 'error',
+      message: 'Post does not exists'
     });
   });
 });
@@ -142,8 +137,7 @@ describe('Get post route test', () => {
     const { body, status } = await supertest(app).get(`/post/${idErrorMock}`);
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Post does not exists',
-      status: 'error',
+      message: 'Post does not exists'
     });
   });
 });
@@ -173,8 +167,7 @@ describe('Create Post route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Localidade does not exists',
-      status: 'error',
+      message: 'Localidade does not exists'
     });
   });
 
@@ -184,8 +177,7 @@ describe('Create Post route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 });

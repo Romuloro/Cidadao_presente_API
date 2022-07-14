@@ -1,5 +1,4 @@
-import { Post } from '@prisma/client';
-import { AppError } from '../../../../errors/AppError';
+import { Response } from 'express';
 import { prisma } from '../../../../prisma/client';
 import { UpdatePostDTO } from '../../dtos/UpdatePostDTO';
 
@@ -12,7 +11,7 @@ export class UpdatePostUseCase {
     localidade_id,
     cidadao_id,
     problemas_,
-  }: UpdatePostDTO): Promise<Post> {
+  }: UpdatePostDTO, res: Response) {
     //Localidade já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
       where: {
@@ -21,7 +20,7 @@ export class UpdatePostUseCase {
     });
 
     if (!localidadeAlreadyExists) {
-      throw new AppError('Localidade does not exists', 404);
+      return res.status(404).json({ message: "Localidade does not exists" })
     }
 
     //Cidadão já existe?
@@ -32,7 +31,7 @@ export class UpdatePostUseCase {
     });
 
     if (!cidadaoAlreadyExists) {
-      throw new AppError('Cidadão does not exists', 404);
+      return res.status(404).json({ message: "Cidadão does not exists" })
     }
 
     //Cidadão já existe?
@@ -43,7 +42,7 @@ export class UpdatePostUseCase {
     });
 
     if (!problemaAlreadyExists) {
-      throw new AppError('Problema does not exists', 404);
+      return res.status(404).json({ message: "Problema does not exists" })
     }
 
     //Cidadão já existe?
@@ -54,7 +53,7 @@ export class UpdatePostUseCase {
     });
 
     if (!postAlreadyExists) {
-      throw new AppError('Post does not exists', 404);
+      return res.status(404).json({ message: "Post does not exists" })
     }
 
     //Update um cidadão

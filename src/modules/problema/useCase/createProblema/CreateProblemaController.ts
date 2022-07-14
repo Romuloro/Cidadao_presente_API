@@ -11,7 +11,7 @@ export class CreateProblemaController {
       titulo,
       descricao,
       tipo,
-    });
+    }, res);
 
     return res.status(201).json(result);
   }

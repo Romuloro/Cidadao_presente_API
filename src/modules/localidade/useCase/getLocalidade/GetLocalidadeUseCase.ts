@@ -1,10 +1,9 @@
-import { Localidade } from '@prisma/client';
-import { AppError } from '../../../../errors/AppError';
+import { Response } from 'express';
 import { prisma } from '../../../../prisma/client';
 import { IdLocalidadeDTO } from '../../dtos/IdLocalidadeDTO';
 
 export class GetLocalidadeUseCase {
-  async execute({ id }: IdLocalidadeDTO): Promise<Localidade> {
+  async execute({ id }: IdLocalidadeDTO, res: Response) {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.localidade.findUnique({
       where: {
@@ -13,7 +12,7 @@ export class GetLocalidadeUseCase {
     });
 
     if (!localidadeAlreadyExists) {
-      throw new AppError('Localidade does not exists', 404);
+      return res.status(404).json({ message: "Localidade does not exists" })
     }
 
     return localidadeAlreadyExists;

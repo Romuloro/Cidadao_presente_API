@@ -23,7 +23,7 @@ export class UpdatePostController {
       localidade_id,
       cidadao_id,
       problemas_,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

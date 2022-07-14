@@ -7,9 +7,7 @@ export class DeleteCidadaoController {
 
     const deleteCidadaoUseCase = new DeleteCidadaoUseCase();
 
-    const result = await deleteCidadaoUseCase.execute({
-      id,
-    });
+    await deleteCidadaoUseCase.execute({id}, res);
 
     return res.status(200).json();
   }

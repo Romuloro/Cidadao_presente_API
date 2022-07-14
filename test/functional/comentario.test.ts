@@ -57,8 +57,7 @@ describe('Delete comentário route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Comentário does not exists',
-      status: 'error',
+      message: 'Comentário does not exists'
     });
   });
 });
@@ -97,8 +96,7 @@ describe('Update comentário route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Comentário does not exists',
-      status: 'error',
+      message: 'Comentário does not exists'
     });
   });
 
@@ -107,7 +105,6 @@ describe('Update comentário route test', () => {
     expect(status).toEqual(404);
     expect(body).toEqual({
       message: 'Post does not exists',
-      status: 'error',
     });
   });
 
@@ -117,8 +114,7 @@ describe('Update comentário route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 });
@@ -137,8 +133,7 @@ describe('Get comentário route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Comentário does not exists',
-      status: 'error',
+      message: 'Comentário does not exists'
     });
   });
 });
@@ -166,8 +161,7 @@ describe('Create comentário route test', () => {
     const { body, status } = await supertest(app).get(`/post/${idErrorMock}`);
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Post does not exists',
-      status: 'error',
+      message: 'Post does not exists'
     });
   });
 
@@ -177,8 +171,7 @@ describe('Create comentário route test', () => {
     );
     expect(status).toEqual(404);
     expect(body).toEqual({
-      message: 'Cidadão does not exists',
-      status: 'error',
+      message: 'Cidadão does not exists'
     });
   });
 });

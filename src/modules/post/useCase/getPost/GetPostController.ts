@@ -9,7 +9,7 @@ export class GetPostController {
 
     const result = await getPostUseCase.execute({
       id,
-    });
+    }, res);
 
     return res.status(200).json(result);
   }

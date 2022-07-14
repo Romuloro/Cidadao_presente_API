@@ -1,5 +1,4 @@
-import { Localidade } from '@prisma/client';
-import { AppError } from '../../../../errors/AppError';
+import { Response } from 'express';
 import { prisma } from '../../../../prisma/client';
 import { CreateLocalidadeDTO } from '../../dtos/CreateLocalidadeDTO';
 
@@ -9,7 +8,7 @@ export class CreateLocalidadeUseCase {
     longitude,
     descricao,
     nickName,
-  }: CreateLocalidadeDTO): Promise<Localidade> {
+  }: CreateLocalidadeDTO, res: Response) {
     //Cidadão já existe?
     const localidadeAlreadyExists = await prisma.localidade.findFirst({
       where: {
@@ -19,7 +18,7 @@ export class CreateLocalidadeUseCase {
     });
 
     if (localidadeAlreadyExists) {
-      throw new AppError('Localidade already exists', 400);
+      return res.status(404).json({ message: "Localidade already exists" })
     }
 
     //Cidadão já existe?
@@ -30,7 +29,7 @@ export class CreateLocalidadeUseCase {
     });
 
     if (!cidadaoAlreadyExists) {
-      throw new AppError('Cidadão does not exists', 400);
+      return res.status(404).json({ message: "Cidadão does not exists" })
     }
 
     //Criar um cidadão
