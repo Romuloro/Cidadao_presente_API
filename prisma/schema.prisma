@@ -16,6 +16,12 @@ enum Sexo {
   Nao_Declarado
 }
 
+enum Roles {
+  Admin
+  Cidadao
+  Organizadores
+}
+
 model Cidadao {
   id String @id @default(uuid())
   name String
@@ -23,7 +29,8 @@ model Cidadao {
   celular String @unique
   senha String 
   nick_name String @unique
-  sexo Sexo 
+  sexo Sexo
+  role Roles 
   create_at DateTime @default(now())
   updated_at DateTime @updatedAt
   localidades Localidade[]
