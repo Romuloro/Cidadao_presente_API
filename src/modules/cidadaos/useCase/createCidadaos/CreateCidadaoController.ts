@@ -4,7 +4,7 @@ import { CreateCidadaoUseCase } from './CreateCidadaoUseCase';
 
 export class CreateCidadaoController {
   async handle(req: Request, res: Response) {
-    const { name, email, celular, senha, nick_name, sexo } = req.body;
+    const { name, email, celular, senha, nick_name, sexo, role } = req.body;
 
     const createCidadaoUseCase = new CreateCidadaoUseCase();
 
@@ -17,6 +17,7 @@ export class CreateCidadaoController {
       senha: encryptedPassword,
       nick_name,
       sexo,
+      role,
     }, res);
 
     return res.status(201).json(result);

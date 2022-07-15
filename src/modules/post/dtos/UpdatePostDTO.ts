@@ -7,5 +7,5 @@ export interface UpdatePostDTO {
   status: Status;
   localidade_id: string;
   cidadao_id: string;
-  problemas_: string;
+  problemas_: string[];
 }

@@ -11,6 +11,7 @@ export class CreateCidadaoUseCase {
     senha,
     nick_name,
     sexo,
+    role
   }: CreateCidadaoDTO, res: Response) {
     //Cidadão já existe?
     const cidadaoAlreadyExists = await prisma.cidadao.findUnique({
@@ -32,6 +33,7 @@ export class CreateCidadaoUseCase {
         senha,
         nick_name,
         sexo,
+        role
       },
     });
 
