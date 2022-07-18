@@ -4,11 +4,9 @@
     "outDir": "dist",
     "strict": true,
     "lib": ["ESnext"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "Node"
   },
   "rootDir": ["./src", "./test"],
-  "include": [
-    "./src/**/*.ts",
-    "./test/**/*.ts"
-  ]
+  "include": ["./src/**/*.ts", "./test/**/*.ts"]
 }
