@@ -21,7 +21,7 @@ const auth = new Auth()
 const cidadaoRoutes = Router();
 
 cidadaoRoutes.post('/login', authenticationController.handle)
-cidadaoRoutes.post('/', auth.token, auth.role(["Admin"]), createCidadaoController.handle);
+cidadaoRoutes.post('/', auth.token, auth.role(["Admin", "Cidadao"]), createCidadaoController.handle);
 cidadaoRoutes.put('/:id', auth.token, auth.role(["Admin"]), updateCidadaoController.handle);
 cidadaoRoutes.get('/', auth.token, auth.role(["Admin", "Organizadores"]), getAllCidadaoController.handle);
 cidadaoRoutes.get('/:id', auth.token, auth.role(["Admin","Cidadao", "Organizadores"]), getCidadaoController.handle);
