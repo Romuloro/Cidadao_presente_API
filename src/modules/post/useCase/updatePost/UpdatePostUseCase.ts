@@ -35,17 +35,6 @@ export class UpdatePostUseCase {
     }
 
     //Cidadão já existe?
-    const problemaAlreadyExists = await prisma.problema.findUnique({
-      where: {
-        id: problemas_,
-      },
-    });
-
-    if (!problemaAlreadyExists) {
-      return res.status(404).json({ message: "Problema does not exists" })
-    }
-
-    //Cidadão já existe?
     const postAlreadyExists = await prisma.post.findUnique({
       where: {
         id,
@@ -54,6 +43,21 @@ export class UpdatePostUseCase {
 
     if (!postAlreadyExists) {
       return res.status(404).json({ message: "Post does not exists" })
+    }
+
+    const problemas = problemas_.map((problema) => { return { id: problema } })
+
+    //Problema já existe?
+    const problemaAlreadyExists = problemas_.map(async(problema) => {
+      await prisma.problema.findUnique({
+        where: {
+          id: problema,
+        },
+      });
+    })
+
+    if (!problemaAlreadyExists) {
+      return res.status(404).json({ message: "Problema does not exists" })
     }
 
     //Update um cidadão
@@ -68,7 +72,7 @@ export class UpdatePostUseCase {
         localidade_id,
         cidadao_id,
         problemas: {
-          connect: [{ id: problemas_ }],
+          connect: problemas,
         },
       },
     });

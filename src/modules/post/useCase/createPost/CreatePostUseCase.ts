@@ -33,6 +33,8 @@ export class CreatePostUseCase {
       return res.status(404).json({ message: "Cidadão does not exists" })
     }
 
+    const problemas = problemas_.map((problema) => { return { id: problema } })
+
     //Criar um cidadão
     const post = await prisma.post.create({
       data: {
@@ -42,11 +44,11 @@ export class CreatePostUseCase {
         localidade_id,
         cidadao_id,
         problemas: {
-          connect: [{ id: problemas_ }],
-        },
-      },
-    });
+          connect: problemas
+        }
+      }
+    })
+    return post
 
-    return post;
-  }
+}
 }

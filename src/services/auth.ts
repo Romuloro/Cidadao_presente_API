@@ -18,8 +18,8 @@ export default class AuthService {
         return await bcrypt.compare(password, hashedPassword);
     }
 
-    public static generateToken(id: string): string {
-        return jwt.sign({ id }, endpointsConfig.AuthKey, {
+    public static generateToken(id: string, role: string): string {
+        return jwt.sign({ id, role }, endpointsConfig.AuthKey, {
             expiresIn: endpointsConfig.ExpiresIn,
         });
     }
@@ -30,6 +30,14 @@ export default class AuthService {
                 return res.status(500).json({ error: "Token Inválido" })
         })
         return decoded;
+    }
+
+    public static verifyTokenRole(token: string, res: Response): any {
+        const decoded_payload = jwt.decode(token, { json: true })
+        if (!decoded_payload){
+            return res.status(500).json({ error: "Token Inválido" })
+        }
+        return decoded_payload.role;
     }
 }
 

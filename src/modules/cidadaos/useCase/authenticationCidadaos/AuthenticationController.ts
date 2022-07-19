@@ -9,6 +9,8 @@ export class AuthenticationController {
 
         const result = await authCidadaoUseCase.execute({email, senha}, res)
 
-        return res.cookie("token", result, { maxAge: 24 * 60 * 60 * 1000 }).status(200).json()
+        return res.cookie("token", result, { maxAge: 24 * 60 * 60 * 1000 }).status(200).json({
+            token:true
+        })
     }
 }

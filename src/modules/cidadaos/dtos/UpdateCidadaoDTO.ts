@@ -1,4 +1,4 @@
-import { Sexo } from '@prisma/client';
+import { Roles, Sexo } from '@prisma/client';
 
 export interface UpdateCidadaoDTO {
   id: string;
@@ -8,4 +8,5 @@ export interface UpdateCidadaoDTO {
   senha: string;
   nick_name: string;
   sexo: Sexo;
+  role: Roles;
 }

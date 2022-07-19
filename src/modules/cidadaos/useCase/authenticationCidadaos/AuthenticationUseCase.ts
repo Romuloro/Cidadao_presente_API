@@ -22,7 +22,7 @@ export class AuthCidadaoUseCase {
             return res.status(401).json({ message: "Cidadão password invalid" })
         }
 
-        const token = await AuthService.generateToken(cidadao.id)
+        const token = await AuthService.generateToken(cidadao.id, cidadao.role)
 
         return token
     }
