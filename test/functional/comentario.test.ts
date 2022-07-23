@@ -17,8 +17,18 @@ const cidadao_create_error_Mock = {
   sexo: 'Masculino',
 };
 
+const authAdmin = async () => {
+  const result = await supertest(app).post('/cidadao/login').send({
+    email: "rro_rodrigueso@teste.com",
+    senha: "12345678!"
+  })
+  return result
+}
+
 const sutFactoryGetAll = async () => {
-  const { body, status } = await supertest(app).get('/comentario/');
+  const authResponse = await authAdmin()
+  const cookie = await authResponse.get("Set-Cookie")
+  const { body, status } = await supertest(app).get('/comentario/').set("Cookie", cookie);
   return body;
 };
 
