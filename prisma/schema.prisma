@@ -69,6 +69,8 @@ model Post {
   localidade_id String
   cidadao Cidadao @relation(fields:[cidadao_id], references: [id])
   cidadao_id String
+  create_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("posts")
 }
@@ -103,6 +105,8 @@ model Comentario {
   cidadao_id String
   post Post @relation(fields: [post_id], references: [id])
   post_id String
+  create_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("comentarios")
 }
