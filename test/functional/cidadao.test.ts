@@ -81,7 +81,6 @@ describe('Update cidadao route test', () => {
       .set('Cookie', cookie)
       .send(cidadao_create_Mock);
     const responseUpdate = await supertest(app).put(`/cidadao/${body.id}`).set('Cookie', cookie).send(cidadaoMocked);
-    console.log(responseUpdate.body)
     expect(responseUpdate.status).toEqual(200);
     expect(responseUpdate.body).toEqual({
       id: body.id,
