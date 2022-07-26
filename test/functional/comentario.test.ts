@@ -5,15 +5,6 @@ import { comentario_create_Mock } from '../../src/test/factories/comentarioFacto
 
 const comentarioCreateMocked = comentario_create_Mock
 
-const cidadao_create_error_Mock = {
-  name: 'Rômulo Rodrigues de Oliveira',
-  email: 'romulo_rodrigues@teste.com',
-  celular: '21999999999',
-  senha: '12345678',
-  nick_name: 'Romin_',
-  sexo: 'Masculino',
-};
-
 const authAdmin = async () => {
   const result = await supertest(app).post('/cidadao/login').send({
     email: "rro_rodrigueso@teste.com",

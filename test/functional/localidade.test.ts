@@ -4,14 +4,6 @@ import { localidade_create_Mock } from '../../src/test/factories/localidadeFacto
 
 const localidadeCreateMocked =  localidade_create_Mock
 
-
-const localidade_update_Mock = {
-  latitude: '14.859210S',
-  longitude: '7.010251W',
-  descricao:
-    'Arsenal Avenida Doutor Eugênio Borges, altura da ponto de ônibus ao lado do shopping Via Lagos.',
-};
-
 let cookie: string[]
 
 beforeEach(async () => {
