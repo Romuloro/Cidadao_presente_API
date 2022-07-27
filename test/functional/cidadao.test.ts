@@ -1,49 +1,49 @@
 import supertest from 'supertest';
 import { app } from '../../src/server';
+import { cidadao_create_Mock } from '../../src/test/factories/cidadaoFactories';
 
-const cidadao_create_Mock = {
-  name: 'Teste Create',
-  email: 'test_03@teste.com',
-  celular: '219999999975',
-  senha: '12345678',
-  nick_name: 'Teste_nick3',
-  sexo: 'Masculino',
-};
+const authAdmin = async () => {
+  const result = await supertest(app).post('/cidadao/login').send({
+    email: "rro_rodrigueso@teste.com",
+    senha: "12345678!"
+  })
+  return result
+}
 
-const cidadao_update_Mock = {
-  name: 'Teste Creat',
-  email: 'test_03@teste.com',
-  celular: '219999999975',
-  senha: '12345678',
-  nick_name: 'Teste_nick3',
-  sexo: 'Masculino',
-};
+const cidadaoMocked = cidadao_create_Mock
 
 const cidadao_create_error_Mock = {
-  name: 'Rômulo Rodrigues de Oliveira',
-  email: 'romulo_rodrigues@teste.com',
-  celular: '21999999999',
-  senha: '12345678',
-  nick_name: 'Romin_',
-  sexo: 'Masculino',
-};
+  name: "Élissa dos Santos de Oliveira",
+  email: "elissasantoso@teste.com",
+  celular: "219999999998",
+  senha: "1245369hu",
+  nick_name: "Nem_",
+  sexo: "Feminino",
+  role: "Organizadores"
+}
 
 const sutFactoryGetAll = async () => {
-  const { body, status } = await supertest(app).get('/cidadao/');
+  const authResponse = await authAdmin()
+  const cookie = await authResponse.get("Set-Cookie")
+  const { body, status } = await supertest(app).get('/cidadao/').set('Cookie', cookie);
   return body;
 };
 
-const idMock = '73dda17d-dd32-470a-8dde-b9518b4dcf1a';
+const idMock = 'e20e492f-2e7d-4c05-bb19-84fff8abaa23';
 const idErrorMock = '73dda17d-dd32-470a-8dde-b9518b4dcf1saidjaisjdipajd';
 
 const sutFactoryGet = async () => {
-  const { body, status } = await supertest(app).get(`/cidadao/${idMock}`);
+  const authResponse = await authAdmin()
+  const cookie = await authResponse.get("Set-Cookie")
+  const { body, status } = await supertest(app).get(`/cidadao/${idMock}`).set('Cookie', cookie);
   return body;
 };
 
 describe('Get all cidadao route test', () => {
   it('should return an array with all citizens', async () => {
-    const { body, status } = await supertest(app).get('/cidadao/');
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
+    const { body, status } = await supertest(app).get('/cidadao/').set('Cookie', cookie);
     const expectedGetall = await sutFactoryGetAll();
     expect(status).toEqual(200);
     expect(body).toEqual(expectedGetall);
@@ -52,16 +52,19 @@ describe('Get all cidadao route test', () => {
 
 describe('Delete cidadao route test', () => {
   it('should delete an citizen in database', async () => {
-    const { body, status } = await supertest(app).post(`/cidadao/`).send(cidadao_create_Mock);
-    const responseDelete = await supertest(app).delete(`/cidadao/${body.id}`);
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
+    const { body, status } = await supertest(app).post(`/cidadao/`).set('Cookie', cookie).send(cidadao_create_Mock);
+    const responseDelete = await supertest(app).delete(`/cidadao/${body.id}`).set('Cookie', cookie);
     expect(responseDelete.status).toEqual(200);
     expect(responseDelete.body).toEqual('');
   });
 
   it('should return error when an citizen does not exist', async () => {
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
     const { body, status } = await supertest(app).delete(
-      `/cidadao/${idErrorMock}`
-    );
+      `/cidadao/${idErrorMock}`).set('Cookie', cookie);
     expect(status).toEqual(404);
     expect(body).toEqual({
       message: 'Cidadão does not exists'
@@ -71,30 +74,34 @@ describe('Delete cidadao route test', () => {
 
 describe('Update cidadao route test', () => {
   it('should update an citizen in database', async () => {
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
     const { body, status } = await supertest(app)
       .post(`/cidadao/`)
+      .set('Cookie', cookie)
       .send(cidadao_create_Mock);
-    const responseUpdate = await supertest(app).put(`/cidadao/${body.id}`).send(cidadao_update_Mock);
+    const responseUpdate = await supertest(app).put(`/cidadao/${body.id}`).set('Cookie', cookie).send(cidadaoMocked);
     expect(responseUpdate.status).toEqual(200);
     expect(responseUpdate.body).toEqual({
       id: body.id,
-      name: 'Teste Creat',
-      email: 'test_03@teste.com',
-      celular: '219999999975',
+      name: cidadaoMocked.name,
+      email: cidadaoMocked.email,
+      celular: cidadaoMocked.celular,
       senha: responseUpdate.body.senha,
-      nick_name: 'Teste_nick3',
-      sexo: 'Masculino',
+      nick_name: cidadaoMocked.nick_name,
+      sexo: cidadaoMocked.sexo,
+      role: cidadaoMocked.role,
       create_at: responseUpdate.body.create_at,
       updated_at: responseUpdate.body.updated_at,
     });
 
-    await supertest(app).delete(`/cidadao/${body.id}`);
+    await supertest(app).delete(`/cidadao/${body.id}`).set('Cookie', cookie);
   });
 
   it('should return error when an citizen does not exist', async () => {
-    const { body, status } = await supertest(app).put(
-      `/cidadao/${idErrorMock}`
-    ).send(cidadao_update_Mock);
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
+    const { body, status } = await supertest(app).put(`/cidadao/${idErrorMock}`).set('Cookie', cookie).send(cidadao_create_Mock);
     expect(status).toEqual(404);
     expect(body).toEqual({
       message: 'Cidadão does not exists'
@@ -104,16 +111,18 @@ describe('Update cidadao route test', () => {
 
 describe('Get cidadao route test', () => {
   it('should return an citizen', async () => {
-    const { body, status } = await supertest(app).get(`/cidadao/${idMock}`);
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
+    const { body, status } = await supertest(app).get(`/cidadao/${idMock}`).set('Cookie', cookie);
     const expectedGet = await sutFactoryGet();
     expect(status).toEqual(200);
     expect(body).toEqual(expectedGet);
   });
 
   it('should return error when an citizen does not exist', async () => {
-    const { body, status } = await supertest(app).get(
-      `/cidadao/${idErrorMock}`
-    );
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
+    const { body, status } = await supertest(app).get(`/cidadao/${idErrorMock}`).set('Cookie', cookie);
     expect(status).toEqual(404);
     expect(body).toEqual({
       message: 'Cidadão does not exists'
@@ -123,28 +132,35 @@ describe('Get cidadao route test', () => {
 
 describe('Create cidadao route test', () => {
   it('should return an citizen create', async () => {
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
     const { body, status } = await supertest(app)
       .post(`/cidadao/`)
-      .send(cidadao_create_Mock);
+      .set('Cookie', cookie)
+      .send(cidadaoMocked);
     expect(status).toEqual(201);
     expect(body).toEqual({
       id: body.id,
-      name: 'Teste Create',
-      email: 'test_03@teste.com',
-      celular: '219999999975',
+      name: cidadaoMocked.name,
+      email: cidadaoMocked.email,
+      celular: cidadaoMocked.celular,
       senha: body.senha,
-      nick_name: 'Teste_nick3',
-      sexo: 'Masculino',
+      nick_name: cidadaoMocked.nick_name,
+      sexo: cidadaoMocked.sexo,
+      role: cidadaoMocked.role,
       create_at: body.create_at,
       updated_at: body.updated_at,
     });
 
-    await supertest(app).delete(`/cidadao/${body.id}`);
+    await supertest(app).delete(`/cidadao/${body.id}`).set('Cookie', cookie);
   });
 
   it('should return error when an citizen already exist', async () => {
+    const authResponse = await authAdmin()
+    const cookie = await authResponse.get("Set-Cookie")
     const { body, status } = await supertest(app)
       .post(`/cidadao/`)
+      .set('Cookie', cookie)
       .send(cidadao_create_error_Mock);
     expect(status).toEqual(401);
     expect(body).toEqual({
