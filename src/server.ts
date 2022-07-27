@@ -11,6 +11,7 @@ dotenv.config();
 const allowedOrigins = ["http://localhost:4000"]
 
 const options: cors.CorsOptions = {
+  credentials: true,
   origin: allowedOrigins
 }
 
