@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Sexo {
+  Masculino
+  Feminino
+  Nao_Declarado
+}
+
+enum Roles {
+  Admin
+  Cidadao
+  Organizadores
+}
+
+model Cidadao {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  celular String @unique
+  senha String 
+  nick_name String @unique
+  sexo Sexo
+  role Roles 
+  create_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  localidades Localidade[]
+  comentarios Comentario[]
+  posts Post[]
+
+  @@map("cidadaos")
+}
+
+model Localidade {
+  id String @id @default(uuid())
+  latitude String @unique
+  longitude String @unique
+  descricao String
+  create_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  cidadaos Cidadao[]
+  posts Post[]
+
+  @@map("localidades")
+}
+
+enum Status {
+  Resolvidos
+  Pendente
+}
+
+model Post {
+  id String @id @default(uuid())
+  anonimo Boolean
+  descricao String
+  status Status
+  comentarios Comentario[]
+  problemas Problema[]
+  localidade Localidade @relation(fields: [localidade_id], references: [id])
+  localidade_id String
+  cidadao Cidadao @relation(fields:[cidadao_id], references: [id])
+  cidadao_id String
+  create_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("posts")
+}
+
+enum Tipo {
+  Infraestrutura
+  Saude
+  Seguranca
+  Poluicao
+}
+
+model Problema {
+  id String @id @default(uuid())
+  titulo String @unique
+  descricao String
+  tipo Tipo
+  posts Post[]
+
+  @@map("problemas")
+}
+
+enum ComentarioTipo {
+  Positivo
+  Negativo
+}
+
+model Comentario {
+  id String @id @default(uuid())
+  descricao String
+  tipo ComentarioTipo
+  author Cidadao @relation(fields: [cidadao_id], references: [id])
+  cidadao_id String
+  post Post @relation(fields: [post_id], references: [id])
+  post_id String
+  create_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("comentarios")
+}
