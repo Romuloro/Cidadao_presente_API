@@ -6,6 +6,7 @@ import { DeleteCidadaoController } from '../modules/cidadaos/useCase/deleteCidad
 import { GetAllCidadaoController } from '../modules/cidadaos/useCase/getAllCidadaos/GetAllCidadosController';
 import { GetCidadaoController } from '../modules/cidadaos/useCase/getCidadaos/GetCidadaosController';
 import { UpdateCidadaoController } from '../modules/cidadaos/useCase/updateCidadaos/UpdateCidadaosController';
+import { GetCidadaoControllerNickName } from '../modules/cidadaos/useCase/getCidadaosNickname/GetCidadaosController';
 import { Auth } from '../utils/auth';
 
 const createCidadaoController = new CreateCidadaoController();
@@ -13,6 +14,7 @@ const updateCidadaoController = new UpdateCidadaoController();
 const getAllCidadaoController = new GetAllCidadaoController();
 const deleteCidadaoController = new DeleteCidadaoController();
 const getCidadaoController = new GetCidadaoController();
+const getCidadaoControlerNickName = new GetCidadaoControllerNickName();
 
 const authenticationController = new AuthenticationController()
 
@@ -25,6 +27,7 @@ cidadaoRoutes.post('/', auth.token, auth.role(["Admin", "Cidadao"]), createCidad
 cidadaoRoutes.put('/:id', auth.token, auth.role(["Admin"]), updateCidadaoController.handle);
 cidadaoRoutes.get('/', auth.token, auth.role(["Admin", "Organizadores"]), getAllCidadaoController.handle);
 cidadaoRoutes.get('/:id', auth.token, auth.role(["Admin","Cidadao", "Organizadores"]), getCidadaoController.handle);
+cidadaoRoutes.get('/nick/:nick_name', auth.token, auth.role(["Admin", "Cidadao", "Organizadores"]), getCidadaoControlerNickName.handle);
 cidadaoRoutes.delete('/:id', auth.role(["Admin"]), deleteCidadaoController.handle);
 
 export { cidadaoRoutes };
